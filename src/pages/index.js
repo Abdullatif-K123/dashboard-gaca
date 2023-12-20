@@ -1,104 +1,111 @@
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import { subDays, subHours } from "date-fns";
-import { Box, Container, Unstable_Grid2 as Grid } from "@mui/material";
+import { Box, Container, Unstable_Grid2 as Grid, Typography } from "@mui/material";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import { OverviewBudget } from "src/sections/overview/overview-budget";
-import { OverviewLatestOrders } from "src/sections/overview/overview-latest-orders";
-import { OverviewLatestProducts } from "src/sections/overview/overview-latest-products";
-import { OverviewSales } from "src/sections/overview/overview-sales";
 import { OverviewTasksProgress } from "src/sections/overview/overview-tasks-progress";
 import { OverviewTotalCustomers } from "src/sections/overview/overview-total-customers";
 import { OverviewTotalProfit } from "src/sections/overview/overview-total-profit";
 import { OverviewTraffic } from "src/sections/overview/overview-traffic";
-
+import { OverViewBlog } from "src/sections/overview/overviewBlog";
+import { useAuth } from "src/hooks/use-auth";
+import axios from "axios";
 const now = new Date();
 
-const Page = () => (
-  <>
-    <Head>
-      <title>Overview | GACA</title>
-    </Head>
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8,
-      }}
-    >
-      <Container maxWidth="xl">
-        <Grid container spacing={3}>
-          <Grid xs={12} sm={6} lg={3}>
-            <OverviewBudget difference={12} positive sx={{ height: "100%" }} value="6" />
-          </Grid>
-          <Grid xs={12} sm={6} lg={3}>
-            <OverviewTotalCustomers value="10" />
-          </Grid>
-          <Grid xs={12} sm={6} lg={3}>
-            <OverviewTasksProgress sx={{ height: "100%" }} value={15} />
-          </Grid>
-          <Grid xs={12} sm={6} lg={3}>
-            <OverviewTotalProfit sx={{ height: "100%" }} value="14" />
+const Page = () => {
+  const { user } = useAuth();
+  const [statistics, setStatistics] = useState({});
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Make your API request here
+        const response = await axios.get("https://gaca.somee.com/api/Statistics/GetData", {
+          headers: {
+            Authorization: `Bearer ${user}`,
+          },
+        });
+        console.log(response.data);
+        setStatistics(response.data);
+        // Update the component state with the fetched data
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [user]);
+  if (!Object.keys(statistics).length) {
+    return (
+      <Typography align="center" gutterBottom variant="h5">
+        Loading...
+      </Typography>
+    );
+  }
+  return (
+    <>
+      <Head>
+        <title>Overview | GACA</title>
+      </Head>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 8,
+        }}
+      >
+        <Container maxWidth="xl">
+          <Grid container spacing={3} style={{ marginBottom: "10px" }}>
+            <Grid xs={12} sm={6} lg={3}>
+              <OverviewBudget
+                difference={12}
+                positive
+                sx={{ height: "100%" }}
+                value={statistics.userCount}
+              />
+            </Grid>
+            <Grid xs={12} sm={6} lg={3}>
+              <OverviewTotalCustomers value={statistics.documentCount} />
+            </Grid>
+            <Grid xs={12} sm={6} lg={3}>
+              <OverviewTasksProgress sx={{ height: "100%" }} value={statistics.stakeholderCount} />
+            </Grid>
+            <Grid xs={12} sm={6} lg={3}>
+              <OverviewTotalProfit sx={{ height: "100%" }} value={statistics.messageCount} />
+            </Grid>
+            <Grid xs={12} sm={6} lg={3}>
+              <OverViewBlog sx={{ height: "100%" }} value={statistics.blogCount} />
+            </Grid>
           </Grid>
           {/* <Grid xs={12} lg={8}>
-            <OverviewSales
-              chartSeries={[
-                {
-                  name: "This year",
-                  data: [18, 16, 5, 8, 3, 14, 14, 16, 17, 19, 18, 20],
-                },
-                {
-                  name: "Last year",
-                  data: [12, 11, 4, 6, 2, 9, 9, 10, 11, 12, 13, 13],
-                },
-              ]}
-              sx={{ height: "100%" }}
-            />
-          </Grid> */}
-          <Grid xs={12} md={6} lg={4}>
+              <OverviewSales
+                chartSeries={[
+                  {
+                    name: "This year",
+                    data: [18, 16, 5, 8, 3, 14, 14, 16, 17, 19, 18, 20],
+                  },
+                  {
+                    name: "Last year",
+                    data: [12, 11, 4, 6, 2, 9, 9, 10, 11, 12, 13, 13],
+                  },
+                ]}
+                sx={{ height: "100%" }}
+              />
+            </Grid> */}
+          <Grid xs={12} md={6} lg={5} style={{ marginBottom: "10px" }}>
             <OverviewTraffic
-              chartSeries={[63, 15, 22]}
-              labels={["Desktop", "Tablet", "Phone"]}
+              chartSeries={[
+                statistics.userCount,
+                statistics.documentCount,
+                statistics.blogCount,
+                statistics.stakeholderCount,
+                statistics.messageCount,
+              ]}
+              labels={["User", "Document", "Blog", "Stakeholder", "Message"]}
               sx={{ height: "100%" }}
             />
           </Grid>
-          {/* <Grid xs={12} md={6} lg={4}>
-            <OverviewLatestProducts
-              products={[
-                {
-                  id: "5ece2c077e39da27658aa8a9",
-                  image: "/assets/products/product-1.png",
-                  name: "Healthcare Erbology",
-                  updatedAt: subHours(now, 6).getTime(),
-                },
-                {
-                  id: "5ece2c0d16f70bff2cf86cd8",
-                  image: "/assets/products/product-2.png",
-                  name: "Makeup Lancome Rouge",
-                  updatedAt: subDays(subHours(now, 8), 2).getTime(),
-                },
-                {
-                  id: "b393ce1b09c1254c3a92c827",
-                  image: "/assets/products/product-5.png",
-                  name: "Skincare Soja CO",
-                  updatedAt: subDays(subHours(now, 1), 1).getTime(),
-                },
-                {
-                  id: "a6ede15670da63f49f752c89",
-                  image: "/assets/products/product-6.png",
-                  name: "Makeup Lipstick",
-                  updatedAt: subDays(subHours(now, 3), 3).getTime(),
-                },
-                {
-                  id: "bcad5524fe3a2f8f8620ceda",
-                  image: "/assets/products/product-7.png",
-                  name: "Healthcare Ritual",
-                  updatedAt: subDays(subHours(now, 5), 6).getTime(),
-                },
-              ]}
-              sx={{ height: "100%" }}
-            />
-          </Grid> */}
-          <Grid xs={12} md={12} lg={8}>
+          {/* <Grid xs={12} md={12} lg={8}>
             <OverviewLatestOrders
               orders={[
                 {
@@ -164,12 +171,12 @@ const Page = () => (
               ]}
               sx={{ height: "100%" }}
             />
-          </Grid>
-        </Grid>
-      </Container>
-    </Box>
-  </>
-);
+          </Grid> */}
+        </Container>
+      </Box>
+    </>
+  );
+};
 
 Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 

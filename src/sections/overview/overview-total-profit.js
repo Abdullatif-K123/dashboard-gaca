@@ -31,8 +31,3 @@ export const OverviewTotalProfit = (props) => {
     </Card>
   );
 };
-
-OverviewTotalProfit.propTypes = {
-  value: PropTypes.string,
-  sx: PropTypes.object,
-};

@@ -66,10 +66,3 @@ export const OverviewTotalCustomers = (props) => {
     </Card>
   );
 };
-
-OverviewTotalCustomers.propTypes = {
-  difference: PropTypes.number,
-  positive: PropTypes.bool,
-  value: PropTypes.string.isRequired,
-  sx: PropTypes.object,
-};

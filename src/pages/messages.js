@@ -10,6 +10,7 @@ import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import { CustomersTable } from "src/sections/customer/customers-table";
 import { CustomersSearch } from "src/sections/customer/customers-search";
 import { applyPagination } from "src/utils/apply-pagination";
+import { MessagesOverView } from "src/sections/messages/MessagesOverView";
 
 const now = new Date();
 
@@ -64,7 +65,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Downloads | GACA</title>
+        <title>Messages | GACA</title>
       </Head>
       <Box
         component="main"
@@ -90,18 +91,51 @@ const Page = () => {
               </div>
             </Stack>
             <CustomersSearch />
-            <CustomersTable
-              count={data.length}
-              items={customers}
-              onDeselectAll={customersSelection.handleDeselectAll}
-              onDeselectOne={customersSelection.handleDeselectOne}
-              onPageChange={handlePageChange}
-              onRowsPerPageChange={handleRowsPerPageChange}
-              onSelectAll={customersSelection.handleSelectAll}
-              onSelectOne={customersSelection.handleSelectOne}
-              page={page}
-              rowsPerPage={rowsPerPage}
-              selected={customersSelection.selected}
+            <MessagesOverView
+              data={[
+                {
+                  id: "213213",
+                  name: "Hussan",
+                  email: "Hussan@gmail.com",
+                  feedbackType: "Recomendation",
+                  status: "opened",
+                },
+                {
+                  id: "21d3223",
+                  name: "Ahmad",
+                  email: "Ahmad@gmail.com",
+                  feedbackType: "others",
+                  status: "UnRead",
+                },
+                {
+                  id: "df2133",
+                  name: "Mike",
+                  email: "Mike@gmail.com",
+                  feedbackType: "Recomendation",
+                  status: "UnRead",
+                },
+                {
+                  id: "2133g",
+                  name: "Mike",
+                  email: "Mike@gmail.com",
+                  feedbackType: "Recomendation",
+                  status: "UnRead",
+                },
+                {
+                  id: "2131123ads",
+                  name: "Mike",
+                  email: "Mike@gmail.com",
+                  feedbackType: "Recomendation",
+                  status: "opened",
+                },
+                {
+                  id: "213323d",
+                  name: "Mike",
+                  email: "Mike@gmail.com",
+                  feedbackType: "Recomendation",
+                  status: "UnRead",
+                },
+              ]}
             />
           </Stack>
         </Container>

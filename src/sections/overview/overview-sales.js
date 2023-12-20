@@ -146,8 +146,3 @@ export const OverviewSales = (props) => {
     </Card>
   );
 };
-
-OverviewSales.protoTypes = {
-  chartSeries: PropTypes.array.isRequired,
-  sx: PropTypes.object,
-};

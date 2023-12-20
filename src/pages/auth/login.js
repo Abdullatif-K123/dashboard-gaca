@@ -74,17 +74,6 @@ const Page = () => {
           <div>
             <Stack spacing={1} sx={{ mb: 3 }}>
               <Typography variant="h4">Login</Typography>
-              {/* <Typography color="text.secondary" variant="body2">
-                Don&apos;t have an account? &nbsp;
-                <Link
-                  component={NextLink}
-                  href="/auth/register"
-                  underline="hover"
-                  variant="subtitle2"
-                >
-                  Register
-                </Link>
-              </Typography> */}
             </Stack>
             <Tabs onChange={handleMethodChange} sx={{ mb: 3 }} value={method}>
               <Tab label="Email" value="email" />
@@ -115,7 +104,7 @@ const Page = () => {
                     value={formik.values.password}
                   />
                 </Stack>
-                <FormHelperText sx={{ mt: 1 }}>Optionally you can skip.</FormHelperText>
+
                 {formik.errors.submit && (
                   <Typography color="error" sx={{ mt: 3 }} variant="body2">
                     {formik.errors.submit}

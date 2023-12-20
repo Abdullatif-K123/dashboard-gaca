@@ -12,7 +12,7 @@ export const LogoDashboard = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g id="Logo" clip-path="url(#clip0_78_56383)">
+      <g id="Logo" clipPath="url(#clip0_78_56383)">
         <g id="Group">
           <path
             id="Vector"

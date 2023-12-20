@@ -50,10 +50,3 @@ export const OverviewBudget = (props) => {
     </Card>
   );
 };
-
-OverviewBudget.prototypes = {
-  difference: PropTypes.number,
-  positive: PropTypes.bool,
-  sx: PropTypes.object,
-  value: PropTypes.string.isRequired,
-};

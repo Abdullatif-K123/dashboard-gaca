@@ -25,8 +25,8 @@ const statusMap = {
   refunded: "error",
 };
 
-export const OverviewLatestOrders = (props) => {
-  const { orders = [], sx } = props;
+export const MessagesOverView = (props) => {
+  const { data = [], sx } = props;
   const router = useRouter();
   return (
     <Card sx={sx}>
@@ -43,9 +43,7 @@ export const OverviewLatestOrders = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map((order) => {
-                const createdAt = format(order.createdAt, "dd/MM/yyyy");
-
+              {data.map((order) => {
                 return (
                   <TableRow
                     hover
@@ -55,11 +53,15 @@ export const OverviewLatestOrders = (props) => {
                       router.push("/messages ");
                     }}
                   >
-                    <TableCell>{order.ref}</TableCell>
-                    <TableCell>{order.customer.name}</TableCell>
-                    <TableCell>{createdAt}</TableCell>
+                    <TableCell>{order.name}</TableCell>
+                    <TableCell>{order.email}</TableCell>
+                    <TableCell>{order.feedbackType}</TableCell>
                     <TableCell>
-                      <SeverityPill color={statusMap[order.status]}>{order.status}</SeverityPill>
+                      <SeverityPill
+                        color={statusMap[order.status === "opened" ? ["delivered"] : ["refunded"]]}
+                      >
+                        {order.status}
+                      </SeverityPill>
                     </TableCell>
                   </TableRow>
                 );
@@ -85,4 +87,9 @@ export const OverviewLatestOrders = (props) => {
       </CardActions>
     </Card>
   );
+};
+
+MessagesOverView.prototype = {
+  orders: PropTypes.array,
+  sx: PropTypes.object,
 };
