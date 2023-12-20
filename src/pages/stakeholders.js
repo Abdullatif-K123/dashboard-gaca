@@ -1,14 +1,11 @@
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
-import ArrowUpOnSquareIcon from "@heroicons/react/24/solid/ArrowUpOnSquareIcon";
-import ArrowDownOnSquareIcon from "@heroicons/react/24/solid/ArrowDownOnSquareIcon";
 import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
 import axios from "axios";
 import {
   Box,
   Button,
   Container,
-  Pagination,
   Stack,
   SvgIcon,
   Typography,
@@ -25,7 +22,7 @@ import { useAuth } from "src/hooks/use-auth";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import { CompanyCard } from "src/sections/companies/company-card";
 import { CompaniesSearch } from "src/sections/companies/companies-search";
-const Page = () => {
+const StakHolder = () => {
   const [apiData, setApiData] = useState([]);
   const { user } = useAuth();
   const [createdId, setCreatedId] = useState(null);
@@ -174,7 +171,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Stackholders | GACA</title>
+        <title>Stakholders | GACA</title>
       </Head>
       <Box
         component="main"
@@ -270,8 +267,8 @@ const Page = () => {
   );
 };
 
-Page.getLayout = (page) => {
+StakHolder.getLayout = (page) => {
   return <DashboardLayout>{page}</DashboardLayout>;
 };
 
-export default Page;
+export default StakHolder;
