@@ -11,14 +11,6 @@
 
 ## Demo
 
-- [Dashboard Page](https://material-kit-react.devias.io)
-- [Companies Page](https://material-kit-react.devias.io/companies)
-- [Customers Page](https://material-kit-react.devias.io/customers)
-- [Account Page](https://material-kit-react.devias.io/account)
-- [Settings Page](https://material-kit-react.devias.io/settings)
-- [Login Page](https://material-kit-react.devias.io/auth/login)
-- [Register Page](https://material-kit-react.devias.io/auth/register)
-
 ## Free Figma Community File
 
 - [Duplicate File](https://www.figma.com/file/b3L1Np4RYiicZAOMopHNkm/Devias-Dashboard-Design-Library-Kit)
@@ -29,14 +21,14 @@ We also have a pro version of this product which bundles even more pages and com
 to save more time and design efforts :)
 
 | Free Version (this one) | [Material Kit Pro - React](https://mui.com/store/items/devias-kit-pro/)  |
-|-------------------------|:-------------------------------------------------------------------------|
-| **9** Demo Pages        | **40+** demo pages                                                       
-| ✔ Mocked Authentication | ✔ Authentication with **Amplify**, **Auth0**, **JWT** and **Firebase**   
-| -                       | ✔ Dark & light mode                                                      
-| -                       | ✔ CRA version                                                            
-| -                       | ✔ TypeScript version - for Standard Plus and Extended license            
-| -                       | ✔ Design files (sketch & figma) - for Standard Plus and Extended license 
-| -                       | ✔ Complete users flows                                                   
+| ----------------------- | :----------------------------------------------------------------------- |
+| **9** Demo Pages        | **40+** demo pages                                                       |
+| ✔ Mocked Authentication | ✔ Authentication with **Amplify**, **Auth0**, **JWT** and **Firebase**   |
+| -                       | ✔ Dark & light mode                                                      |
+| -                       | ✔ CRA version                                                            |
+| -                       | ✔ TypeScript version - for Standard Plus and Extended license            |
+| -                       | ✔ Design files (sketch & figma) - for Standard Plus and Extended license |
+| -                       | ✔ Complete users flows                                                   |
 
 ## Quick start
 
@@ -82,7 +74,7 @@ material-kit-react
 		├── _app.js
 		├── _document.js
 		├── account.js
-		├── companies.js
+		├── stakholder.js
 		├── customers.js
 		├── index.js
 		├── products.js
